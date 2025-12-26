@@ -1,5 +1,5 @@
-//Updated 04-26-2025
-//By Shining, Jelly, IDGeek, Skewb	
+// Updated 12-26-2025
+// By QueenSuzie, Shining, Jelly, IDGeek, Skewb
 state("sonic2app")
 {
 	bool timerEnd         : 0x0134AFDA;
@@ -84,12 +84,11 @@ startup
 
 update
 {
-	
 	if (vars.countedFrames % 30 == 0) {
 		vars.chao = Process.GetProcessesByName("ChaoEditor");
 	}
 	vars.useIGT = vars.chao.Length > 0 || settings["timeIGT"];
-	
+
 	//First time in a stage?
 	if (current.menuMode == 0 || current.menuMode == 1 || current.menuMode == 16)
 	{
@@ -247,7 +246,6 @@ update
 	{
 		vars.splitDelay = 1;
 	}
-	
 }
 
 start
@@ -301,10 +299,10 @@ start
 	{
 		if (settings["storyStart"] && !settings["NG+"])
 		{
-			if (timer.Run.CategoryName == "Hero Story" || timer.Run.CategoryName == "Dark Story" || timer.Run.CategoryName == "All Stories")
+			if (timer.Run.CategoryName == "Fallen Hero Story" || timer.Run.CategoryName == "Risen Dark Story" || timer.Run.CategoryName == "All Stories")
 			{
-				if (current.currMenu == 5 && ((timer.Run.CategoryName == "Hero Story" && current.currEvent == 0) || (timer.Run.CategoryName == "Dark Story" && current.currEvent == 100) ||
-				(timer.Run.CategoryName == "All Stories" && (current.currEvent == 0 || current.currEvent == 100))))
+				if (current.currMenu == 5 && ((timer.Run.CategoryName == "Fallen Hero Story" && current.currEvent == 101) || (timer.Run.CategoryName == "Risen Dark Story" && current.currEvent == 3) ||
+				(timer.Run.CategoryName == "All Stories" && (current.currEvent == 101 || current.currEvent == 3))))
 				{
 					return true;
 				}
@@ -316,10 +314,10 @@ start
 		}
 		else if (settings["NG+"])
 		{
-			if (timer.Run.CategoryName == "Hero Story" || timer.Run.CategoryName == "Dark Story" || timer.Run.CategoryName == "Last Story" || timer.Run.CategoryName == "All Stories")
+			if (timer.Run.CategoryName == "Fallen Hero Story" || timer.Run.CategoryName == "Risen Dark Story" || timer.Run.CategoryName == "Last Story" || timer.Run.CategoryName == "All Stories")
 			{
-				if (current.currMenu == 2 && ((timer.Run.CategoryName == "Hero Story" && current.currEvent == 0) || (timer.Run.CategoryName == "Dark Story" && current.currEvent == 100) ||
-				(timer.Run.CategoryName == "Last Story" && current.currEvent == 200) || (timer.Run.CategoryName == "All Stories" && (current.currEvent == 0 || current.currEvent == 100))))
+				if (current.currMenu == 2 && ((timer.Run.CategoryName == "Hero Story" && current.currEvent == 101) || (timer.Run.CategoryName == "Dark Story" && current.currEvent == 3) ||
+				(timer.Run.CategoryName == "Last Story" && current.currEvent == 200) || (timer.Run.CategoryName == "All Stories" && (current.currEvent == 101 || current.currEvent == 3))))
 				{
 					return true;
 				}
@@ -384,8 +382,7 @@ split
 
 isLoading
 {
-	
-	return true;	
+	return true;
 }
 
 gameTime
